@@ -6,8 +6,12 @@ import * as yup from 'yup';
 import { connect } from 'react-redux'
 import { register } from '../../../actions'
 import PropTypes from 'prop-types'
+import { Link, Redirect } from 'react-router-dom'
 
-const Register = ({ setAlert, register }) => {
+const Register = ({ isAuthenticated, register }) => {
+  if(isAuthenticated) {
+    return <Redirect to ='/dashboard'/>
+  }
     const schema = yup.object({
       name: yup.string().required('Name is required'),
       email: yup.string().required('Email is required'),
@@ -116,4 +120,8 @@ Register.propTypes = {
   // setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired
 }
-export default connect(null, { register })(Register)
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+})
+export default connect(mapStateToProps, { register })(Register)

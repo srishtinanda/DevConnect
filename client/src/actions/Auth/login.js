@@ -1,34 +1,34 @@
 
 import axios from 'axios'
-import { REGISTER_SUCCESS, REGISTER_FAIL } from '../types'
+import { LOGIN_SUCCESS, LOGIN_FAIL } from '../types'
 import { setAlert } from '../index'
 import { userLoaded } from '../../actions'
 
-const register = (name, email, password) => async dispatch => {
+const login = (email, password) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     }
 
-    const body = JSON.stringify({ name, email, password })
+    const body = JSON.stringify({ email, password })
     try {
-        const res = await axios.post('/api/users', body, config)
+        const res = await axios.post('/api/auth', body, config)
 
         dispatch({
-            type: REGISTER_SUCCESS,
+            type: LOGIN_SUCCESS,
             payload: res.data
         })
-        dispatch(userLoaded())
+        dispatch(userLoaded())    
     } catch(err) {
         const errors = err.response.data.errors;
         if(errors) {
             errors.forEach(error => dispatch(setAlert(error.msg)))
         }
         dispatch({
-            type: REGISTER_FAIL
+            type: LOGIN_FAIL
         })
     }
 }
 
-export default register
+export default login

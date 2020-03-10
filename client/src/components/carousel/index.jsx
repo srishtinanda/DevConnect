@@ -6,11 +6,11 @@ class CarouselComponent extends Component {
     return (
       <Jumbotron>
       <h1>Hello, world!</h1>
-      <p>
+      <div>
         This is a simple hero unit, a simple jumbotron-style component for calling
         extra attention to featured content or information.
-      </p>
-      <p>
+      </div>
+      <div>
           <ButtonToolbar>
             <Button variant="dark" size="lg"
               onClick={() => this.props.history.push('/login')}>
@@ -21,7 +21,7 @@ class CarouselComponent extends Component {
               Register
             </Button>
           </ButtonToolbar>
-          </p>
+          </div>
     </Jumbotron>
     )
   }
