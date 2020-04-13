@@ -1,14 +1,14 @@
-import React from 'react'
-import { FaUserAlt } from 'react-icons/fa';
+import React, { memo } from 'react'
+import { FaUserAlt } from 'react-icons/fa'
 import { Button, Form } from 'react-bootstrap'
 import { Formik } from 'formik'
 import * as yup from 'yup';
 import { connect } from 'react-redux'
 import { register } from '../../../actions'
 import PropTypes from 'prop-types'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
-const Register = ({ isAuthenticated, register }) => {
+const Register = memo(({ isAuthenticated, register }) => {
   if(isAuthenticated) {
     return <Redirect to ='/dashboard'/>
   }
@@ -50,7 +50,9 @@ const Register = ({ isAuthenticated, register }) => {
       values,
       handleChange,
       touched
-    }) => (
+    }) => {
+      console.log('check field in register', touched.name)
+      return (
     <Form noValidate onSubmit={handleSubmit}
       className="form-fields">
        <Form.Control 
@@ -109,13 +111,13 @@ const Register = ({ isAuthenticated, register }) => {
         Register
       </Button>
     </Form>
-   )}    
+   )}}    
   </Formik>
   <div> Already have an account ? <a href='/login'> Sign in </a></div>
 </div>
 </React.Fragment>
 )
-}
+})
 Register.propTypes = {
   // setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired

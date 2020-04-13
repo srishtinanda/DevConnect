@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { login } from '../../../actions'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 const Login = ({login, isAuthenticated}) => {
   const handleLogin = (e) => {

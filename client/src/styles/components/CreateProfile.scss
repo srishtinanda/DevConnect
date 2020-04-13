@@ -1,0 +1,34 @@
+.create-profile-page {
+    .heading-description {
+        padding-left: 16px;
+    }
+    .form-fields {
+        .form-label {           
+            margin-top: 16px;
+        }
+        .form-control:first-child  {
+            margin-top: 16px;
+        }
+        :last-child  {
+            margin-bottom: 16px;
+        }
+    }
+    .btn.btn-info {
+        display: block;
+    }
+    .social-links {
+        display: flex;
+        align-items: end;
+        svg {
+            margin-right: 16px;
+        }
+    }
+    // .btn.btn-secondary {
+    //     display: inline;
+    // }
+    .button-child.text-muted.form-text {
+        display: inline;
+        margin-left: 16px;
+        font-size: 16px;
+    }
+}

@@ -1,13 +1,17 @@
 import React, { Fragment } from 'react'
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
-import { FaSignOutAlt } from 'react-icons/fa';
+import { FaUserAlt, FaSignOutAlt } from 'react-icons/fa';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { logout } from '../../../actions'
 
 const Header = ({ auth: { isAuthenticated, loading}, logout}) => {
   const authLinks = ( <Nav className="navbar">
+    <Nav.Link href='/dashboard'>
+    <FaUserAlt/>
+      {` Dashboard`}
+    </Nav.Link>
     <Nav.Link onClick={logout} href='#!'>
     <FaSignOutAlt/>
       {` Logout`}
