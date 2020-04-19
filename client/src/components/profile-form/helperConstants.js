@@ -41,12 +41,12 @@ export const fields = [
   },
   {
     label: "Github Username",
-    name: "githubUsername",
+    name: "githubusername",
     supportiveText: "If you want your latest repos and a Github link, include your username"
   },
   {
     label: "Short Bio",
-    name: "shortBio",
+    name: "bio",
     isTextArea: true,
     supportiveText: "Tell us a little about yourself"
   }
@@ -67,13 +67,13 @@ export const socialMediaFields = [
     },
     {
       label: "YouTube URL",
-      name: "youTube",
+      name: "youtube",
       icon: FaYoutube,
       color: "#FF0000"
     },
     {
       label: "LinkedIn URL",
-      name: "linkedIn",
+      name: "linkedin",
       icon: FaLinkedin,
       color: " #0e76a8"
     },

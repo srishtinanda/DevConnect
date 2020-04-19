@@ -1,50 +1,57 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { Link, withRouter } from 'react-router-dom'
 import { FaUserAlt } from 'react-icons/fa'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Proptypes from 'prop-types'
 import { Formik } from 'formik'
 import * as yup from 'yup';
 import { dropDownOptions, fields , socialMediaFields } from './helperConstants'
-import { createProfile } from '../../actions'
+import { createProfile, getCurrentProfile } from '../../actions'
 
-const CreateProfile = ({ createProfile, history }) => {
+const EditProfile = ({ history }) => {
     const schema = yup.object({
         skills: yup.string()
         .required('Skills are required'),
         status: yup.string().required('This field is required')
       })
     const [displaySocialInputs, toggleSocialInputs] = useState(false)
+    const stateProfile = useSelector(state => state.profile)
+    const profileState = stateProfile.profile
+    const loadingState = stateProfile.loading
+    const dispatch = useDispatch()
     const socialInputs = () => toggleSocialInputs(!displaySocialInputs)
-   
+   useEffect(() => {
+    dispatch(getCurrentProfile())
+   }, [loadingState])
     return (
     <div className ='create-profile-page'>
-    <h1 className='heading'>Create Your Profile</h1>
+    <h1 className='heading'>Edit Your Profile</h1>
     <FaUserAlt />
     <span className='heading-description'>
         Let's get some information to make your profile stand out
     </span>
     <Formik
       initialValues={{
-        status: "",
-        company: "",
-        website: "",
-        location: "",
-        skills: "",
-        githubusername: "",
-        bio: "",
-        twitter: "",
-        facebook: "",
-        youTube: "",
-        linkedIn: "",
-        instagram: ""
+        status: !profileState?.status ? "" : profileState.status,
+        company: !profileState?.company ? "" : profileState.company,
+        website: !profileState?.website ? "" : profileState.website,
+        location: !profileState?.location ? "" : profileState.location,
+        skills: !profileState?.skills ? "" : profileState.skills.join(','),
+        githubusername: !profileState?.githubusername ? "" : profileState.githubusername,
+        bio: !profileState?.bio ? "" : profileState.bio,
+        twitter: !profileState?.social ? "" : profileState.social.twitter,
+        facebook: !profileState?.social ? "" : profileState.social.facebook,
+        youtube: !profileState?.social ? "" : profileState.social.youtube,
+        linkedin: !profileState?.social ? "" : profileState.social.linkedin,
+        instagram: !profileState?.social ? "" : profileState.social.instagram
       }}
+      enableReinitialize={true}
       validationSchema={schema}
       onSubmit={(values, actions) => {
         console.log(values,'valuezs', actions)
         // actions.CreateProfile(false);
-        createProfile(values, history)
+        dispatch(createProfile(values, history, true))
       }}
     >
       {({handleSubmit,
@@ -59,13 +66,13 @@ const CreateProfile = ({ createProfile, history }) => {
         <Form.Control as="select"
             name='status'
             onChange={handleChange}
+            value={values.status}
             isValid={touched.status && !errors.status}
             isInvalid={!!errors.status}
             >
             {dropDownOptions.map((item, key) => (
-                    <option key={key} 
-                    selected={!item.value} 
-                    disabled={!item.value}
+                    <option key={key}
+                        disabled={!item.value}
                     >{item.label}</option>
                 )
             )}
@@ -74,6 +81,7 @@ const CreateProfile = ({ createProfile, history }) => {
             {errors.status}
         </Form.Control.Feedback>
          {fields.map((field, key) => {
+             console.log(values, 'bhsdbfghoeiuwdpem iohdoisnoiewnd', profileState)
              return(<div key={key}>
                 <Form.Label>
                     {field.label}
@@ -82,6 +90,7 @@ const CreateProfile = ({ createProfile, history }) => {
                     as={field?.isTextArea ? "textarea" : "input" }
                     name={field.name}
                     onChange={handleChange}
+                    value={values[field.name]}
                     placeholder={field?.mandatory ? `* ${field.label}`: field.label}
                     isValid={field?.mandatory && touched[field.name] && !errors[field.name]}
                     isInvalid={!!errors[field.name]}
@@ -108,6 +117,7 @@ const CreateProfile = ({ createProfile, history }) => {
                <Form.Control
                    name={field.name}
                    onChange={handleChange}
+                   value={values[field.name]}
                    placeholder={field.label}
                />
             </div>)
@@ -124,8 +134,4 @@ const CreateProfile = ({ createProfile, history }) => {
     </Formik>
     </div>)}
 
-CreateProfile.propTypes = {
-  createProfile: Proptypes.func.isRequired
-}
-
-export default connect(null, {createProfile})(withRouter(CreateProfile))
+export default withRouter(EditProfile)

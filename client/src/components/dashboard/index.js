@@ -5,6 +5,7 @@ import { getCurrentProfile } from '../../actions'
 import { Link } from 'react-router-dom'
 import Spinner from '../spinner'
 import { FaUserAlt } from 'react-icons/fa'
+import DashboardActions from './dashboardActions'
 
 const body = ({ user }, { profile }) => {
   console.log('for testing')
@@ -14,9 +15,9 @@ const body = ({ user }, { profile }) => {
 <FaUserAlt/>
 <span> Welcome { user && user.name } </span>
 { profile !== null ?
-  <div>Profile</div>
+  <DashboardActions />
   : <Fragment>
-    <div>You have not yet setuo a profile,
+    <div>You have not yet setup a profile,
     please add some info</div>
     <Button variant="outline-primary" size="lg">
       <Link to ='/create-profile'>Create Profile </Link>

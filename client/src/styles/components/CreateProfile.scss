@@ -1,4 +1,6 @@
-.create-profile-page {
+.create-profile-page,
+.add-experience-page,
+.add-education-page {
     .heading-description {
         padding-left: 16px;
     }
@@ -23,9 +25,12 @@
             margin-right: 16px;
         }
     }
-    // .btn.btn-secondary {
-    //     display: inline;
-    // }
+    .form-check {
+        margin-top: 16px;
+        .form-check-label {
+            margin-bottom: 0;
+        }
+    }
     .button-child.text-muted.form-text {
         display: inline;
         margin-left: 16px;
