@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Form, Button } from 'react-bootstrap'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { IoIosGitBranch } from 'react-icons/io'
 import { connect } from 'react-redux'
 import Proptypes from 'prop-types'
@@ -13,7 +13,6 @@ const AddExperience = ({ addExperience, history }) => {
         title: yup.string().required('This field is required'),
         company: yup.string().required('This field is required'),
         from: yup.string().required('This field is required'),
-        from: yup.date().required('This field is required'),
         to: yup.string().when('current', {
           is: false,
           then: yup.string()
@@ -21,8 +20,6 @@ const AddExperience = ({ addExperience, history }) => {
           otherwise: yup.string().notRequired(),
       }),
       })
-    const [displaySocialInputs, toggleSocialInputs] = useState(false)
-    const socialInputs = () => toggleSocialInputs(!displaySocialInputs)
    
     return (
     <div className ='add-experience-page'>

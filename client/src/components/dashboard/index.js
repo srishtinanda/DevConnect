@@ -3,19 +3,29 @@ import { Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { getCurrentProfile } from '../../actions'
 import { Link } from 'react-router-dom'
-import Spinner from '../spinner'
-import { FaUserAlt } from 'react-icons/fa'
+import { FaUserAlt, FaUserMinus } from 'react-icons/fa'
 import DashboardActions from './dashboardActions'
+import Spinner from '../spinner'
+import Experience from './experience';
+import Education from './education';
+import { deleteAccount } from '../../actions';
 
-const body = ({ user }, { profile }) => {
-  console.log('for testing')
+const body = ({ user }, { profile }, dispatch) => {
+  console.log('for testing', profile?.education, profile?.experience)
   return (
 <div>
 <h1> Dashboard </h1>
 <FaUserAlt/>
 <span> Welcome { user && user.name } </span>
 { profile !== null ?
-  <DashboardActions />
+  <>
+    <DashboardActions />
+    <Experience experience={profile.experience} />
+    <Education education={profile.education} />
+    <Button variant="danger"
+      onClick={()=> dispatch(deleteAccount())}
+    ><FaUserMinus/>Delete My Account</Button>
+  </>
   : <Fragment>
     <div>You have not yet setup a profile,
     please add some info</div>
@@ -32,31 +42,12 @@ const Dashboard = () => {
     useEffect(() => {
       dispatch(getCurrentProfile())
     }, [dispatch, auth])
-//   const handleLogin = (e) => {
-//     const userName = document.getElementById("emailId").value;
-//     const password = document.getElementById("userPassword").value;
-//     e.preventDefault()
-//     login(userName, password)
-//   }
-//   if(isAuthenticated) {
-//     return <Redirect to ='/dashboard'/>
-//   }
 console.log(profileState, 'thisisd profile')
 return (
   profileState.loading &&
   profileState.profile === null ?
   <Spinner />
-  : body(auth, profileState)
+  : body(auth, profileState, dispatch)
 )}
-// Dashboard.propTypes = {
-//   // getCurrentProfile: PropTypes.func.isRequired,
-//   auth: PropTypes.object.isRequired,
-//   profile: PropTypes.object.isRequired,
-// }
-
-// const mapStateToProps = state => ({
-//   auth: state.auth,
-//   profile: state.profile
-// })
 
 export default Dashboard

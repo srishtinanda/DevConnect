@@ -8,6 +8,9 @@ import { logout } from '../../../actions'
 
 const Header = ({ auth: { isAuthenticated, loading}, logout}) => {
   const authLinks = ( <Nav className="navbar">
+    <Nav.Link href='/profiles'>
+      {` Developers`}
+    </Nav.Link>
     <Nav.Link href='/dashboard'>
     <FaUserAlt/>
       {` Dashboard`}
@@ -19,7 +22,7 @@ const Header = ({ auth: { isAuthenticated, loading}, logout}) => {
 </Nav>
 ) 
   const guestLinks = ( <Nav className="navbar">
-  <Nav.Link href='#!'>
+  <Nav.Link href='/profiles'>
       Developers
     </Nav.Link>
     <Link to='/register' className='nav-items'>

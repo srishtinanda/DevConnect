@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Form, Button } from 'react-bootstrap'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { IoIosGitBranch } from 'react-icons/io'
 import { connect } from 'react-redux'
 import Proptypes from 'prop-types'
@@ -20,10 +20,7 @@ const AddEducation = ({ addEducation, history }) => {
               .required('This field is required'),
             otherwise: yup.string().notRequired(),
         }),
-      })
-    const [displaySocialInputs, toggleSocialInputs] = useState(false)
-    const socialInputs = () => toggleSocialInputs(!displaySocialInputs)
-   
+      })   
     return (
     <div className ='add-education-page'>
     <h1 className='heading'>Add Education</h1>

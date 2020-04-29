@@ -1,29 +1,26 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Jumbotron, Button, ButtonToolbar } from 'react-bootstrap'
+import { withRouter } from 'react-router-dom'
 
-class CarouselComponent extends Component {
-  render() {
-    return (
-      <Jumbotron>
-      <h1>Hello, world!</h1>
-      <div>
-        This is a simple hero unit, a simple jumbotron-style component for calling
-        extra attention to featured content or information.
+const CarouselComponent = ({ history }) => (
+  <Jumbotron>
+  <h1>Hello, world!</h1>
+  <div>
+    This is a simple hero unit, a simple jumbotron-style component for calling
+    extra attention to featured content or information.
+  </div>
+  <div>
+      <ButtonToolbar>
+        <Button variant="dark" size="lg"
+          onClick={() => history.push('/login')}>
+          Login
+        </Button>
+        <Button variant="dark" size="lg"
+          onClick={() => history.push('/register')}>
+          Register
+        </Button>
+      </ButtonToolbar>
       </div>
-      <div>
-          <ButtonToolbar>
-            <Button variant="dark" size="lg"
-              onClick={() => this.props.history.push('/login')}>
-              Login
-            </Button>
-            <Button variant="dark" size="lg"
-              onClick={() => this.props.history.push('/register')}>
-              Register
-            </Button>
-          </ButtonToolbar>
-          </div>
-    </Jumbotron>
-    )
-  }
-}
-export default CarouselComponent
+</Jumbotron>
+)
+export default withRouter(CarouselComponent)

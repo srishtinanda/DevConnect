@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { FaUserAlt } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
-import Proptypes from 'prop-types'
 import { Formik } from 'formik'
 import * as yup from 'yup';
 import { dropDownOptions, fields , socialMediaFields } from './helperConstants'
@@ -23,7 +22,7 @@ const EditProfile = ({ history }) => {
     const socialInputs = () => toggleSocialInputs(!displaySocialInputs)
    useEffect(() => {
     dispatch(getCurrentProfile())
-   }, [loadingState])
+   }, [loadingState, dispatch])
     return (
     <div className ='create-profile-page'>
     <h1 className='heading'>Edit Your Profile</h1>
