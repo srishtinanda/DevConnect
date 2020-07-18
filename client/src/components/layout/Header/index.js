@@ -11,6 +11,9 @@ const Header = ({ auth: { isAuthenticated, loading}, logout}) => {
     <Nav.Link href='/profiles'>
       {` Developers`}
     </Nav.Link>
+    <Nav.Link href='/posts'>
+      {` Posts`}
+    </Nav.Link>
     <Nav.Link href='/dashboard'>
     <FaUserAlt/>
       {` Dashboard`}

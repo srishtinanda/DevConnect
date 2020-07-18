@@ -22,8 +22,7 @@ const ProfileAbout = ({ profile:
     `${name}s bio`}
     </Card.Title>
     <Card.Text>
-    {bio &&
-    <div>{bio}</div>}
+    {bio}
     </Card.Text> 
   </Card.Body>
   <hr />
@@ -40,7 +39,7 @@ const ProfileAbout = ({ profile:
     </Card.Text> 
   </Card.Body>
 </Card>
-    </div>)
+</div>)
      
 }
 

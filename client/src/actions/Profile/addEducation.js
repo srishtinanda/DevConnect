@@ -20,7 +20,7 @@ const addEducation = (formData, history) => async dispatch => {
         history.push('/dashboard')
         
     } catch(err) {
-        const errors = err.response.data.errors;
+        const errors = err.response?.data.errors;
         if(errors) {
             errors.forEach(error => dispatch(setAlert(error.msg)))
         }

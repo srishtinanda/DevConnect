@@ -51,7 +51,6 @@ const Register = memo(({ isAuthenticated, register }) => {
       handleChange,
       touched
     }) => {
-      console.log('check field in register', touched.name)
       return (
     <Form noValidate onSubmit={handleSubmit}
       className="form-fields">

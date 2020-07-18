@@ -1,12 +1,16 @@
 import React, { Fragment, useEffect } from 'react'
 import Spinner from '../spinner'
 import { getAllProfiles, getProfileById } from '../../actions'
-import { Button } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { FaConnectdevelop } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
+import ProfileExperience from './ProfileExperience'
+import ProfileEducation from './ProfileEducation'
+import ProfileGithub from './ProfileGithub'
+import { CardBody } from 'react-bootstrap/Card';
 
 const Profile = ({ match }) => {
   const dispatch = useDispatch()
@@ -15,7 +19,7 @@ const Profile = ({ match }) => {
   useEffect(() => {
     dispatch(getProfileById(match.params.id))
   }, [getProfileById, match.params.id])
-  console.log(auth, 'after auth is profile', profile)
+  console.log(profile?.profile?.education, 'after auth is profile', profile?.profile?.experience)
     return (<>
       {profile.profile === null || profile.loading ? <Spinner /> :
     <Fragment> 
@@ -34,6 +38,44 @@ const Profile = ({ match }) => {
         </Link>)}
       <ProfileTop profile={profile.profile}/>
       <ProfileAbout profile={profile.profile}/>
+      <div className='container'>
+      <div className='row'>
+        <div className='card col'>
+          <h4 style={{ paddingTop: '20px', color: '#156161', textAlign: 'center' }}>
+                Experience
+          </h4>
+          <Card.Body>
+            {profile.profile.experience.length > 0 ?
+              <>{
+                profile.profile.experience.map((exp, i) => {
+                  console.log(i, i === profile.profile.experience.length-1)
+                  return (
+                    <ProfileExperience key={exp._id} experience={exp}
+                    isLastItem={i === profile.profile.experience.length-1}/>
+                )})
+              }</> :
+              <h4> No Experience Credentials </h4>}
+          </Card.Body>
+        </div>
+        <div className='card col'>
+          <h4 style={{ paddingTop: '20px', color: '#156161', textAlign: 'center' }}>
+                Education
+          </h4>
+          <Card.Body>
+            {profile.profile.education.length > 0 ?
+              <>{
+                profile.profile.education.map((edu, i) => (
+                    <ProfileEducation key={edu._id} education={edu}
+                    isLastItem={i === profile.profile.education.length-1}/>
+                ))
+              }</> :
+              <h4> No Education Credentials </h4>}
+          </Card.Body>
+        </div>
+      </div>
+      </div>
+      {profile.profile.githubusername && 
+      <ProfileGithub username={profile.profile.githubusername}/>}
     </Fragment>}
     </>)
 }

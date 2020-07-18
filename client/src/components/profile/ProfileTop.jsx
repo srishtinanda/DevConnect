@@ -2,7 +2,6 @@ import React, { Fragment, useEffect } from 'react'
 import Spinner from '../spinner'
 import { getAllProfiles, getProfileById } from '../../actions'
 import { Button, Card } from 'react-bootstrap'
-import { useSelector, useDispatch } from 'react-redux'
 import {
     FaUserAlt,
     FaTwitter,
@@ -30,7 +29,7 @@ const ProfileTop = ({ profile:
     return (<div className='profile-top'>
     <Card style={{ backgroundColor: '#156161', textAlign: 'center' }}>
   <Card.Body style={{ color: 'white'}}>
-    <Card.Title>{name}</Card.Title>
+    <h2>{name}</h2>
     <Card.Text>
       {status} {company && `at ${company}`}
     </Card.Text>
@@ -39,10 +38,10 @@ const ProfileTop = ({ profile:
     </Card.Text>
     <span>
     {website && <a href = {website} target='_blank'><FaGlobe /></a>}
-    {socialMediaFields.map((field) => {
+    {socialMediaFields.map((field, i) => {
         const Icon = field.icon
         const name = social[field.name]
-        return (name&& <a href = {name} target='_blank'>
+        return (name && <a key={i} href = {name} target='_blank'>
         <Icon color='white'/>
         </a>
         )

@@ -21,7 +21,7 @@ const register = (name, email, password) => async dispatch => {
         })
         dispatch(userLoaded())
     } catch(err) {
-        const errors = err.response.data.errors;
+        const errors = err.response?.data.errors;
         if(errors) {
             errors.forEach(error => dispatch(setAlert(error.msg)))
         }
