@@ -40,8 +40,6 @@ const AddExperience = ({ addExperience, history }) => {
       }}
       validationSchema={schema}
       onSubmit={(values, actions) => {
-        console.log(values,'valuezs', actions)
-        // actions.addExperience(false);
         addExperience(values, history)
       }}
     >
@@ -64,7 +62,7 @@ const AddExperience = ({ addExperience, history }) => {
         value={values.title}
         onChange={handleChange('title')}
         isValid={touched.title && !errors.title}
-        isInvalid={!!errors.title}
+        isInvalid={touched.title && !!errors.title}
       />
         <Form.Control.Feedback type="invalid">
           {errors.title}
@@ -79,7 +77,7 @@ const AddExperience = ({ addExperience, history }) => {
           value={values.company}
           name="company"
           isValid={touched.company && !errors.company}
-          isInvalid={!!errors.company}
+          isInvalid={touched.company && !!errors.company}
         />
         <Form.Control.Feedback type="invalid">
           {errors.company}
@@ -103,7 +101,7 @@ const AddExperience = ({ addExperience, history }) => {
           onChange={handleChange('from')}
           value={values.from}
           isValid={touched.from && !errors.from}
-          isInvalid={!!errors.from}
+          isInvalid={touched.from && !!errors.from}
         />
         <Form.Control.Feedback type="invalid">
           {errors.from}
@@ -126,7 +124,7 @@ const AddExperience = ({ addExperience, history }) => {
           value={values.to}
           disabled={values.current}
           isValid={touched.to && !errors.to}
-          isInvalid={!!errors.to}
+          isInvalid={touched.to && !!errors.to}
           />
           <Form.Control.Feedback type="invalid">
             {errors.to}
